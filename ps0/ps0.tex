@@ -15,7 +15,7 @@
 \setlength{\parindent}{0pt}
 \medskip\hrulefill\medskip
 
-{\bf Name:} Your Name
+{\bf Name:} Kim Heesuk
 
 \medskip\hrulefill
 
@@ -74,35 +74,60 @@
 \problem  % Problem 1
 
 \begin{problemparts}
-\problempart % Problem 1a
-\problempart % Problem 1b
-\problempart % Problem 1c
+  \problempart % Problem 1a
+  $A = \{1, 6, 12, 13, 9\}$, $B = \{3, 6, 12, 15\}$, $A \cap B = \{6, 12\}$.
+  \problempart % Problem 1b
+  $|A \cup B| = |\{1, 3, 6, 12, 13, 15, 9\}| = 7$
+  \problempart % Problem 1c
+  $|A - B| = |\{1, 13, 9\}| = 3$
 \end{problemparts}
 
 \problem  % Problem 2
 
 \begin{problemparts}
-\problempart % Problem 2a
-\problempart % Problem 2b
-\problempart % Problem 2c
+  \problempart % Problem 2a
+  $E[X] = 3/2$
+  \problempart % Problem 2b
+  $E[Y] = (7/2)^2 = 49/4$
+  \problempart % Problem 2c
+  $E[X + Y] = E[X] + E[Y] = 55/4$
 \end{problemparts}
 
 \problem  % Problem 3
 
 \begin{problemparts}
-\problempart % Problem 3a
-\problempart % Problem 3b
-\problempart % Problem 3c
+  \problempart % Problem 3a
+  true
+  \problempart % Problem 3b
+  false
+  \problempart % Problem 3c
+  false
 \end{problemparts}
 
 \problem  % Problem 4
 
+For $n = 1$, $\sum_{i=1}^1 i^3 = 1 = \left[\frac{1\cdot2}{2}\right]^2$.
+
+Assume $\sum_{i=1}^n i^3 = \left[\frac{n(n+1)}{2}\right]^2$, then
+\begin{align}
+    \begin{split}
+      \sum_{i=1}^{n+1} i^3 &= \left[\frac{n(n+1)}{2}\right]^2 + (n+1)^3 \\
+                           &= (n+1)^2\left[\left(\frac{n}{2}\right)^2 + (n+1)\right] \\
+                           &= \left[\frac{(n+1)(n+2)}{2}\right]^2.
+    \end{split}
+\end{align}
+
 \newpage
 \problem  % Problem 5
 
-\vfill
+For $|V| = 1$, given graph $G$ is acyclic since there is no edge. Let
+$G_n$ be set of all connected undirected graph $G = (V, E)$ for which
+$|V| = |E| + 1 = n$. Assume $(\forall G\in G_n)$ G is acyclic. Then
+$(\forall G\in G_{n+1}, \exists G'\subset G)\ G'\in G_n$ since $G$ is connected.
+Moreover, $G - G'$ has only one edge and one vertex that is connected to some
+vertex of $G'$ since $G'$ consume $n-1$ edges. Thus $G$ is acyclic.
+
 \problem  % Problem 6
-Submit your implementation to {\small\url{alg.mit.edu}}.
 
 \begin{lstlisting}
 def count_long_subarray(A):
@@ -111,10 +136,20 @@ def count_long_subarray(A):
     Output: count | number of longest increasing subarrays of A
     '''
     count = 0
-    ##################
-    # YOUR CODE HERE #
-    ##################
-    return count
+    length = 0
+    lengths = []
+    prev = 0
+    for a in A:
+        if a < prev:
+            lengths.append(length)
+            length = 1
+        else:
+            length += 1
+        prev = a
+    lengths.append(length)
+    
+    return lengths.count(max(lengths))
+
 \end{lstlisting}
 
 \end{problems}
