@@ -84,6 +84,12 @@
   answer is $(f_5, f_3, f_1, f_4, f_2)$.
 
   \problempart % Problem 1b
+  Since $n \in O(2^n)$, $f_1 \in O(f_3)$. Also
+  $n \in O(n^2), n^2 \in O(2^n)$,
+  $f_1 = 2^n \in \Theta(6006^n) = \Theta(f_2)$ and
+  $f_3 = 2^{6006^n} \in \Theta(6006^{2^n}) = \Theta(f_4)$, the answer is
+  $(\{f_1, f_2\}, f_5, \{f_3, f_4\})$.
+  
   \problempart % Problem 1c
   \problempart % Problem 1d
 \end{problemparts}
