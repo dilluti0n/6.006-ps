@@ -91,7 +91,38 @@
   $(\{f_1, f_2\}, f_5, \{f_3, f_4\})$.
   
   \problempart % Problem 1c
+  Firstly, it is known that $\log n! \in \Theta(n\log n)$. By this,
+  \begin{align}
+    \begin{split}
+      \log f_3 = \log((6n)!) \in \Theta(6n\log{6n}) &= \Theta(n(\log 6 + \log n)) \\
+                                                    &= \Theta(n\log n).
+    \end{split}
+  \end{align}
+  For $f_2$,
+  \begin{align}
+    \begin{split}
+      \log f_2 = \log\choose{n}{n-6} &= \log\frac{n!}{6!(n-6)!} \\
+                                     &\in \Theta\left(\log\frac{n!}{(n-6)!}\right) \\
+                                     &= \Theta(\log n + \log(n-1) + \dots + \log(n-5)) \\
+                                     &= \Theta(\log n).
+    \end{split}
+  \end{align}
+  And for $f_4$,
+  \begin{align}
+    \begin{split}
+      \log f_4 = \log\choose{n}{n/6} &= \log\frac{n!}{(n/6)!(5n/6)!} \\
+                                     &\sim\log\frac{\sqrt{2\pi n}(n/e)^n}{\sqrt{2\pi n}(n/6e)^{n/6}\sqrt{2\pi n}(5n/6e)^{5n/6}} \\
+                                     &= \log\frac{(6/5^{5/6})^n}{\sqrt{2\pi n}} \\
+                                     &\in \Theta\left(n\log(6/5^{5/6}) - \frac{1}{2}(\log n + \log 2\pi)\right) = \Theta(n)
+    \end{split}
+  \end{align}
+  since $6/5^{5/6} > 1$. Lastly,
+  $\log f_1 = \log{n^n} \in\Theta(n\log n)$, and
+  $\log f_5 = \log n^6 \in\Theta(\log n)$.
+  Now we can conclude that the answer is $(\{f_2, f_5\}, f_4, \{f_1, f_3\})$.
+
   \problempart % Problem 1d
+  
 \end{problemparts}
 
 \newpage
