@@ -156,7 +156,7 @@
       if k < 2:
         return
       D.insert_at(i + k - 1, D.delete_at(i))     # O(log(n))
-      reverse(D, i, k - 1)                   # T(k - 1)
+      reverse(D, i, k - 1)                       # T(k - 1)
   \end{lstlisting}
   If we call \texttt{reverse(D, i, 1)}, it returns and it is correct.
   Assume \texttt{reverse(D, i, k)} works right, \texttt{reverse(D, i,
@@ -166,11 +166,29 @@
   which resulting reverse $k+1$ items starting at index $i$.
   
   \problempart % Problem 2b
+  $T(k) = O(\log n) + O(\log n) + T(k-1)$, $T(k) = O(k\log n)$
+  
+  \begin{lstlisting}
+    def move(D, i, k, j):          #T(k)
+      if k < 1:
+        return
+      temp = D.delete_at(i)        # O(log(n))
+      if j < i:
+        D.insert_at(j + 1, temp)   # O(log(n))
+      else:
+        D.insert_at(j, temp)       # O(log(n))
+      move(D, i, k - 1, j)         # T(k-1)
+  \end{lstlisting}
+    
+  Note that when $j\geq i + k$ (which can be just $\neg(j < i)$ since
+  $i\leq j < i+k$ is false), \texttt{D.delete\_at(i)} makes
+  the index of element with pre-deletion index $j$ be $j-1$.
   
 \end{problemparts}
 
 \newpage
 \problem  % Problem 3
+
 
 \newpage
 \problem  % Problem 4
