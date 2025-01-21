@@ -149,8 +149,24 @@
 \problem  % Problem 2
 
 \begin{problemparts}
-\problempart % Problem 2a
-\problempart % Problem 2b
+  \problempart % Problem 2a
+  $T(k) = O(\log n) + T(k - 1)$, $T(k) = O(k\log n)$
+  \begin{lstlisting}
+    def reverse(D, i, k): # T(k)
+      if k < 2:
+        return
+      D.insert_at(i + k - 1, D.delete_at(i))     # O(log(n))
+      reverse(D, i, k - 1)                   # T(k - 1)
+  \end{lstlisting}
+  If we call \texttt{reverse(D, i, 1)}, it returns and it is correct.
+  Assume \texttt{reverse(D, i, k)} works right, \texttt{reverse(D, i,
+    k + 1)} should work right because it deletes element of $i$'th
+  index, and insert it to $i + k$ (next to the pre-deletion index
+  $i + k$) and reverses $k$ items starting at index $i$ of \texttt{D},
+  which resulting reverse $k+1$ items starting at index $i$.
+  
+  \problempart % Problem 2b
+  
 \end{problemparts}
 
 \newpage
