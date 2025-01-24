@@ -187,7 +187,56 @@
 \end{problemparts}
 
 \newpage
-\problem  % Problem 3
+\problem % Problem 3
+\texttt{build(X)} constructs a static array with size $|\texttt{X}|$
+and store pages in that array. Also, it initializes some fields to
+provide operations for bookmarks.
+
+\begin{itemize}
+  \item \texttt{A} index of page placed on in front of bookmark $A$
+  \item \texttt{B} index of page placed on in front of bookmark $B$
+  \item \texttt{array\_front}
+  \item \texttt{array\_behind}
+  \item \texttt{array\_index} index of page of \texttt{array\_behind[0]}
+\end{itemize}
+
+Pages between the bookmarks will be stored in separate arrays
+\texttt{array\_front} and \texttt{array\_behind} on which
+\texttt{place\_mark(i, m)} called.
+
+When there is no bookmark placed, \texttt{place\_mark(i, m)} just set
+field \texttt{m} to \texttt{i}. There are three possible cases left.
+
+\begin{enumerate}
+   \item One bookmark is placed and call \texttt{place\_mark(i, m)} for that bookmark
+   \item One bookmark is placed and call \texttt{place\_mark(i, m)} for other bookmark
+   \item All bookmarks are placed
+\end{enumerate}
+
+For each cases, setting \texttt{m} to \texttt{i} is trivial.
+
+For second case, lets assume $\texttt{B} > \texttt{A}$. Set
+\texttt{array\_index} to \texttt{(A + B)/2} and construct dynamic
+array with size $2 * (\texttt{B} - \texttt{array\_index})$ for
+\texttt{array\_behind}, and move page from index \texttt{array\_index}
+to \texttt{B} here. For \texttt{array\_front}, do same thing with size
+$2 * (\texttt{array\_index} - \texttt{A})$. If
+$\texttt{B} = \texttt{A}$, construct two empty dynamic arrays for
+$\texttt{A} = \texttt{B} = \texttt{array\_index}$ with certain fixed
+size. This is needed to operate \texttt{shift\_mark} correctly.
+
+For third case, if such of a operation expands \texttt{array\_front}
+or \texttt{array\_behind}, if size of an array does not exceed the
+capacity of array, it could be just moving the elements. Else, each
+dynamic array can be expanded with twice of previous capacity. If it
+reduces but does not cross the \texttt{array\_index} on either side,
+just setting \texttt{m} to \texttt{i} is sufficient. If it crosses,
+reallocate \texttt{array\_front} and \texttt{array\_behind} with same
+method for second case with new
+$\texttt{array\_index} = \texttt{(A + B)/2}$.
+
+Time complexitiy is $O(n)$ in worst case.
+
 
 
 \newpage
