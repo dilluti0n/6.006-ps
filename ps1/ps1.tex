@@ -193,11 +193,15 @@ and store pages in that array. Also, it initializes some fields to
 provide operations for bookmarks.
 
 \begin{itemize}
-  \item \texttt{A} index of page placed on in front of bookmark $A$
-  \item \texttt{B} index of page placed on in front of bookmark $B$
-  \item \texttt{array\_index} initialized by \texttt{(A + B)/2} when \texttt{place\_mark} operates
-  \item \texttt{array\_front} Array containing \texttt{array\_index - 1}'th page to first bookmark's front page in reverse order
-  \item \texttt{array\_behind} Array containing \texttt{array\_index}'th page to second bookmark's front page
+\item \texttt{A} index of page placed on in front of bookmark $A$
+  
+\item \texttt{B} index of page placed on in front of bookmark $B$
+  
+\item \texttt{array\_index} initialized by \texttt{(A + B)/2} when \texttt{place\_mark} operates
+  
+\item \texttt{array\_front} Array containing \texttt{array\_index - 1}'th page to first bookmark's front page in reverse order
+  
+\item \texttt{array\_behind} Array containing \texttt{array\_index}'th page to second bookmark's front page
 \end{itemize}
 
 Pages between the bookmarks will be stored in separate arrays
@@ -208,9 +212,11 @@ When there is no bookmark placed, \texttt{place\_mark(i, m)} just set
 field \texttt{m} to \texttt{i}. There are three possible cases left.
 
 \begin{enumerate}
-   \item One bookmark is placed and call \texttt{place\_mark(i, m)} for that bookmark
-   \item One bookmark is placed and call \texttt{place\_mark(i, m)} for other bookmark
-   \item All bookmarks are placed
+\item One bookmark is placed and call \texttt{place\_mark(i, m)} for that bookmark
+  
+\item One bookmark is placed and call \texttt{place\_mark(i, m)} for other bookmark
+  
+\item All bookmarks are placed
 \end{enumerate}
 
 For each cases, set field \texttt{m} to \texttt{i}.
@@ -222,8 +228,9 @@ array with size $2 * (\texttt{B} - \texttt{array\_index})$ for
 to \texttt{B} here. For \texttt{array\_front}, do same thing with size
 $2 * (\texttt{array\_index} - \texttt{A})$. If
 $\texttt{B} = \texttt{A}$, construct two empty dynamic arrays for
-$\texttt{A} = \texttt{B} = \texttt{array\_index}$ with certain fixed
-size. This is needed to operate \texttt{shift\_mark} correctly.
+$\texttt{A} = \texttt{B} = \texttt{array\_index}$ with certain
+non-zero fixed size. This is needed to operate \texttt{shift\_mark}
+correctly.
 
 For third case, if such of a operation expands \texttt{array\_front}
 or \texttt{array\_behind}, if size of an array does not exceed the
@@ -242,7 +249,7 @@ for this operation is $O(n)$ in worst case and amortized.
 
 Assuming $\texttt{A} < \texttt{B}$, \texttt{read\_page(i)} returns the
 i'th index of original array if it is not between to the two
-bookmarks.  (i.e. $\neg(\texttt{A} < i \leq\texttt{B})$) If it is,
+bookmarks.  (i.e. $\neg(\texttt{A}\leq i \leq\texttt{B})$) If it is,
 return sufficient page from \texttt{array\_behind} or
 \texttt{array\_front} due to the \texttt{array\_index} and
 \texttt{i}. Note that \texttt{array\_front} is inversed. It consumes
@@ -277,10 +284,36 @@ is $O(1)$ in amortized case since it is rarely happend.
 \problem  % Problem 4
 
 \begin{problemparts}
-\problempart % Problem 4a
-\problempart % Problem 4b
-\problempart % Problem 4c
-\problempart Submit your implementation to {\small\url{alg.mit.edu}}.
+  \problempart % Problem 4a
+  \begin{itemize}
+  \item \texttt{insert\_first(x)} If list is empty
+    (i.e. \texttt{L.tail} is \texttt{None}), set \texttt{L.tail} to
+    \texttt{x} first. And then set \texttt{x.next} as \texttt{L.head},
+    \texttt{x.prev} to \texttt{None}, and set \texttt{L.head} to
+    \texttt{x}.
+
+  \item \texttt{insert\_last(x)} If list is empty
+    (i.e. \texttt{L.head} is \texttt{None}), set \texttt{L.head} to
+    \texttt{x} first. And then set \texttt{x.next} to \texttt{None},
+    \texttt{x.prev} to \texttt{L.tail}, and set \texttt{L.tail} to
+    \texttt{x}.
+
+  \item \texttt{delete\_first()} If list is empty
+    (i.e. \texttt{L.head} is \texttt{None}), return. Else, set
+    \texttt{L.head} to \texttt{L.head.next}. If it was \texttt{None}
+    (i.e. there was only one node), set \texttt{L.tail} to
+    \texttt{None} too.
+
+  \item \texttt{delete\_last()} If list is empty (i.e. \texttt{L.head}
+    is \texttt{None}), return. Else, set \texttt{L.tail} to
+    \texttt{L.head.prev}. If it was \texttt{None} (i.e. there was only
+    one node), set \texttt{L.head} to \texttt{None} too.
+  \end{itemize}
+
+  \problempart % Problem 4b
+  \problempart % Problem 4c
+  \problempart Submit your implementation to
+  {\small\url{alg.mit.edu}}.
 \end{problemparts}
 
 \end{problems}
