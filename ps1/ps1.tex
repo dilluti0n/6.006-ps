@@ -235,14 +235,28 @@ reallocate \texttt{array\_front} and \texttt{array\_behind} with same
 method for second case with new
 $\texttt{array\_index} = \texttt{(A + B)/2}$.
 
-Time complexitiy is $O(n)$ in worst case.
+Time complexitiy for this operation $O(n)$ in worst case.
 
 Assuming $\texttt{A} < \texttt{B}$, \texttt{read\_page(i)} returns the
 i'th index of original array if it is not between to the two
 bookmarks.  (i.e. $\neg(\texttt{A} < i \leq\texttt{B})$) If it is,
 return sufficient page from \texttt{array\_behind} or
-\texttt{array\_front} due to the \texttt{array\_index} and \texttt{i}. Note that
-\texttt{array\_front} is inversed.
+\texttt{array\_front} due to the \texttt{array\_index} and
+\texttt{i}. Note that \texttt{array\_front} is inversed. It consumes
+constant time on either cases. So its $O(1)$ in worst case.
+
+On \texttt{shift\_mark(m, d)}, the method is same as third case for
+\texttt{place\_mark(i, m)} so we can just call this function with
+$\texttt{i} = \texttt{m} + \texttt{d}$. Note \texttt{m} denotes the
+field \texttt{A} or \texttt{B} which tracks index of page placed on in
+front of bookmark. Since $\texttt{d} \in {-1, 1}$, most operation
+would be done in constant time when it does not exceed the capacity or
+\texttt{array\_index} in reduction. When the realocate happend in each
+case, the time consumption would be $O(n)$ however it can be said that
+the running time of operation is $O(1)$ in amortized case since it is
+rarely happend.
+
+
 
 \newpage
 \problem  % Problem 4
