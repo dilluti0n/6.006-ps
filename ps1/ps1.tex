@@ -320,10 +320,14 @@ is $O(1)$ in amortized case since it is rarely happend.
   \texttt{L.tail} as \texttt{x\_1} too.
 
   \problempart % Problem 4c
+  If \texttt{L\_2.head} is \texttt{None} (i.e. \texttt{L\_2} is
+  empty), do nothing and return.
+
+  Firstly, set \texttt{L\_2.tail.next} as \texttt{x.next}. And then,
+  set \texttt{x.next} to \texttt{L\_2.head}, \texttt{L\_2.head.prev}
+  to \texttt{x}. Now set $L_2$'s head and tail to \texttt{None}.
   
-  
-  \problempart Submit your implementation to
-  {\small\url{alg.mit.edu}}.
+  \problempart Submit your implementation to {\small\url{alg.mit.edu}}.
 \end{problemparts}
 
 \end{problems}
