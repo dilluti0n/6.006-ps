@@ -307,8 +307,8 @@ is $O(1)$ in amortized case since it is rarely happend.
 
   \item \texttt{delete\_last()} If list is empty (i.e. \texttt{L.head}
     is \texttt{None}), return. Else, set \texttt{L.tail} to
-    \texttt{L.head.prev}. And then, set \texttt{L.head.next} to
-    \texttt{None}. If the \texttt{L.head.prev} was \texttt{None}
+    \texttt{L.tail.prev}. And then, set \texttt{L.tail.next} to
+    \texttt{None}. If the \texttt{L.tail.prev} was \texttt{None}
     (i.e. there was only one node), set \texttt{L.head} to
     \texttt{None} too.
   \end{itemize}
@@ -328,6 +328,7 @@ is $O(1)$ in amortized case since it is rarely happend.
   to \texttt{x}. Now set $L_2$'s head and tail to \texttt{None}.
   
   \problempart Submit your implementation to {\small\url{alg.mit.edu}}.
+  
 \end{problemparts}
 
 \end{problems}
