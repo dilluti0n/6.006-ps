@@ -300,14 +300,17 @@ is $O(1)$ in amortized case since it is rarely happend.
 
   \item \texttt{delete\_first()} If list is empty
     (i.e. \texttt{L.head} is \texttt{None}), return. Else, set
-    \texttt{L.head} to \texttt{L.head.next}. If it was \texttt{None}
-    (i.e. there was only one node), set \texttt{L.tail} to
-    \texttt{None} too.
+    \texttt{L.head} to \texttt{L.head.next}. And then, set
+    \texttt{L.head.prev} to \texttt{None}.  If the
+    \texttt{L.head.next} was \texttt{None} (i.e. there was only one
+    node), set \texttt{L.tail} to \texttt{None} too.
 
   \item \texttt{delete\_last()} If list is empty (i.e. \texttt{L.head}
     is \texttt{None}), return. Else, set \texttt{L.tail} to
-    \texttt{L.head.prev}. If it was \texttt{None} (i.e. there was only
-    one node), set \texttt{L.head} to \texttt{None} too.
+    \texttt{L.head.prev}. And then, set \texttt{L.head.next} to
+    \texttt{None}. If the \texttt{L.head.prev} was \texttt{None}
+    (i.e. there was only one node), set \texttt{L.head} to
+    \texttt{None} too.
   \end{itemize}
 
   \problempart % Problem 4b
