@@ -237,7 +237,12 @@ $\texttt{array\_index} = \texttt{(A + B)/2}$.
 
 Time complexitiy is $O(n)$ in worst case.
 
-
+Assuming $\texttt{A} < \texttt{B}$, \texttt{read\_page(i)} returns the
+i'th index of original array if it is not between to the two
+bookmarks.  (i.e. $\neg(\texttt{A} < i \leq\texttt{B})$) If it is,
+return sufficient page from \texttt{array\_behind} or
+\texttt{array\_front} due to the \texttt{array\_index} and \texttt{i}. Note that
+\texttt{array\_front} is inversed.
 
 \newpage
 \problem  % Problem 4
