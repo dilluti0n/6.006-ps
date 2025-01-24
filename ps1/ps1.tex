@@ -311,7 +311,14 @@ is $O(1)$ in amortized case since it is rarely happend.
   \end{itemize}
 
   \problempart % Problem 4b
+  Set \texttt{x\_1.next} as \texttt{x\_2.next}, and then set
+  \texttt{x\_1.next.prev} as \texttt{x\_1}. If \texttt{x\_2.next} was
+  \texttt{None}, (i.e. \texttt{x\_2} was the tail of the list) set
+  \texttt{L.tail} as \texttt{x\_1} too.
+
   \problempart % Problem 4c
+  
+  
   \problempart Submit your implementation to
   {\small\url{alg.mit.edu}}.
 \end{problemparts}
