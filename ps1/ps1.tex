@@ -195,9 +195,9 @@ provide operations for bookmarks.
 \begin{itemize}
   \item \texttt{A} index of page placed on in front of bookmark $A$
   \item \texttt{B} index of page placed on in front of bookmark $B$
-  \item \texttt{array\_front}
-  \item \texttt{array\_behind}
-  \item \texttt{array\_index} index of page of \texttt{array\_behind[0]}
+  \item \texttt{array\_index} initialized by \texttt{(A + B)/2} when \texttt{place\_mark} operates
+  \item \texttt{array\_front} Array containing \texttt{array\_index - 1}'th page to first bookmark's front page in reverse order
+  \item \texttt{array\_behind} Array containing \texttt{array\_index}'th page to second bookmark's front page
 \end{itemize}
 
 Pages between the bookmarks will be stored in separate arrays
@@ -213,7 +213,7 @@ field \texttt{m} to \texttt{i}. There are three possible cases left.
    \item All bookmarks are placed
 \end{enumerate}
 
-For each cases, setting \texttt{m} to \texttt{i} is trivial.
+For each cases, set field \texttt{m} to \texttt{i}.
 
 For second case, lets assume $\texttt{B} > \texttt{A}$. Set
 \texttt{array\_index} to \texttt{(A + B)/2} and construct dynamic
@@ -235,7 +235,10 @@ reallocate \texttt{array\_front} and \texttt{array\_behind} with same
 method for second case with new
 $\texttt{array\_index} = \texttt{(A + B)/2}$.
 
-Time complexitiy for this operation $O(n)$ in worst case.
+When reducing, note each deleted elements should be updated to the
+origianl array. Still, the original array can be static array since
+there is no page insertions in given operation set. Time complexitiy
+for this operation is $O(n)$ in worst case and amortized.
 
 Assuming $\texttt{A} < \texttt{B}$, \texttt{read\_page(i)} returns the
 i'th index of original array if it is not between to the two
@@ -243,7 +246,8 @@ bookmarks.  (i.e. $\neg(\texttt{A} < i \leq\texttt{B})$) If it is,
 return sufficient page from \texttt{array\_behind} or
 \texttt{array\_front} due to the \texttt{array\_index} and
 \texttt{i}. Note that \texttt{array\_front} is inversed. It consumes
-constant time on either cases. So its $O(1)$ in worst case.
+constant time on either cases since each access are array access, so
+its $O(1)$ in both worst case and amortized.
 
 On \texttt{shift\_mark(m, d)}, the method is same as third case for
 \texttt{place\_mark(i, m)} so we can just call this function with
@@ -256,7 +260,18 @@ case, the time consumption would be $O(n)$ however it can be said that
 the running time of operation is $O(1)$ in amortized case since it is
 rarely happend.
 
-
+Lastly, \texttt{move\_page(m)}. If bookmarks are placed in same place
+or one or zero bookmark placed on dataset, this operation does
+nothing. Else, if it is called with the second bookmark(i.e. index of
+its front page is larger), delete the last element of
+\texttt{array\_behind} and append it to the end of
+\texttt{array\_front}. In deletion, if it cross the
+\texttt{array\_index} reallocate be done mentioned above. also, in
+insertion, also if it exceeds the capacity, it should reallocate
+\texttt{array\_front} as mentioned above. For the first one, do it
+oppositly. Same as \texttt{shift\_mark} this operation consumes $O(n)$
+when reallocation happen, however it can be said that the running time
+is $O(1)$ in amortized case since it is rarely happend.
 
 \newpage
 \problem  % Problem 4
